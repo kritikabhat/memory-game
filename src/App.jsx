@@ -1,7 +1,4 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
 import Header from './Components/Header.jsx'
 import Score from './Components/Score.jsx'
@@ -10,7 +7,10 @@ import GameGrid from './Components/GameGrid.jsx'
 // At the end, change font to Pokemon also
 
 function App() {
-  
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
+
+
   return (
     <>
     <section className='headerSection'>

@@ -7,13 +7,12 @@ export default function CatchPokemon() {
   //const pokemonNames = ["bulbasaur", "pikachu", "charmander", "squirtle", 
   //        "pidgeot", "geodude", "eevee", "snorlax", "machoke", "gengar" ]
 
-  const pokemonNames = ["bulbasaur", "pikachu"]
+  const pokemonNames = ["bulbasaur", "pikachu", "charmander"]
   const pokemonURLs = pokemonNames.map((item) => `https://pokeapi.co/api/v2/pokemon/${item}`)
 
   useEffect(() => {
     const getMultiplePokemons = async () => {
       setLoading(true)
-
       try {
 
       const requests = pokemonURLs.map(async (url) => {
@@ -23,7 +22,7 @@ export default function CatchPokemon() {
         return response.json()
       })
       const results = await Promise.all(requests)
-
+      
       const myData = results.map(item => 
         ({ name: item.name, 
           url: item.sprites.other["official-artwork"].front_default
@@ -47,15 +46,38 @@ export default function CatchPokemon() {
     return <div>Loading...</div>
   }
 
+  function randomiseURLArray() {
+    const randomizedArr = [...urlAndNames]
+
+    for (let i = randomizedArr.length - 1; i > 0; i--) {
+      let j = Math.floor(Math.random() * (i + 1))
+      let temp = randomizedArr[j]
+      randomizedArr[j] = randomizedArr[i]
+      randomizedArr[i] = temp
+    }
+
+    setUrlAndNames(randomizedArr)
+  }
+
+
+  function handleClickPokemon(e) {
+    console.log(e.target.id) // This way I can know which one was clicked
+    console.log("Clicked")
+    randomiseURLArray()
+    console.log("should trigger reload")
+  }
+
   return (<>
+  <div className='gameGrid' onClick={handleClickPokemon} >
   {
     urlAndNames.map((obj) => {
       return (
         <div className="pokemonCard" key={obj.name}>
-        <img src={obj.url} alt={`Image of ${obj.name}`} />
+        <img id={obj.name} src={obj.url} alt={`Image of ${obj.name}`} />
         </div>
       )
     })
-  }        
+  } 
+  </div>       
   </>)
 }
