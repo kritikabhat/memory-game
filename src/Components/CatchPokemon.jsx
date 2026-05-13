@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react'
 
 export default function CatchPokemon() {
   const [loading, setLoading] = useState(false)
-  const [urls, setUrls] = useState([])
+  const [urlAndNames, setUrlAndNames] = useState([])
 
-  // const pokemonNames = ["bulbasaur", "pikachu", "charmander", "squirtle", 
-  //  "pidgeot", "geodude", "eevee", "snorlax", "machoke", "gengar" ]
+  //const pokemonNames = ["bulbasaur", "pikachu", "charmander", "squirtle", 
+  //        "pidgeot", "geodude", "eevee", "snorlax", "machoke", "gengar" ]
 
   const pokemonNames = ["bulbasaur", "pikachu"]
   const pokemonURLs = pokemonNames.map((item) => `https://pokeapi.co/api/v2/pokemon/${item}`)
@@ -23,8 +23,13 @@ export default function CatchPokemon() {
         return response.json()
       })
       const results = await Promise.all(requests)
-      const imageURLs = results.map((item) => item.sprites.other["official-artwork"].front_default)
-      setUrls(imageURLs)
+
+      const myData = results.map(item => 
+        ({ name: item.name, 
+          url: item.sprites.other["official-artwork"].front_default
+        }))
+      
+      setUrlAndNames(myData)
 
       } catch {
         console.log(error)
@@ -37,18 +42,20 @@ export default function CatchPokemon() {
     getMultiplePokemons()
   }, [])
 
-  console.log("Urls after: ")
-  console.log(urls)
-
   if (loading) {
     console.log("loading")
     return <div>Loading...</div>
   }
 
-  return (<div className="gameGrid">
-      <div className="pokemonCard">
-        
-      </div>
-
-  </div>)
+  return (<>
+  {
+    urlAndNames.map((obj) => {
+      return (
+        <div className="pokemonCard" key={obj.name}>
+        <img src={obj.url} alt={`Image of ${obj.name}`} />
+        </div>
+      )
+    })
+  }        
+  </>)
 }

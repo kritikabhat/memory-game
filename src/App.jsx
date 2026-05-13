@@ -10,7 +10,7 @@ import GameGrid from './Components/GameGrid.jsx'
 // At the end, change font to Pokemon also
 
 function App() {
-
+  
   return (
     <>
     <section className='headerSection'>
