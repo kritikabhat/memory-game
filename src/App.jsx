@@ -3,7 +3,8 @@ import './App.css'
 import Header from './Components/Header.jsx'
 import GameGrid from './Components/GameGrid.jsx'
 
-// At the end, change font to Pokemon also
+import winningSound from './assets/eaglaxle-gaming-victory-464016.mp3'
+const winningSoundAudio = new Audio(winningSound)
 
 function App() {
   const [score, setScore] = useState(0);
@@ -14,9 +15,15 @@ function App() {
   function handleUrlAndNames(myData) {
     setUrlAndNames(myData)
   }
+  const playSound = () => {
+    winningSoundAudio.currentTime = 0;
+    winningSoundAudio.play();
+  };
 
   const handleScores = (id) => {
     if (clickedCards.includes(id)) {
+      playSound()
+      alert("Game ended!")
       setScore(0);
       setClickedCards([]);
     } else {
@@ -49,6 +56,9 @@ function App() {
       Get points by clicking on an image but don't click on any more than once!
       <GameGrid handleUrlAndNames={handleUrlAndNames} urlAndNames={urlAndNames} handleScores={handleScores} />
     </section>
+    <footer>
+      Sound Effect by <a href="https://pixabay.com/users/eaglaxle-53749042/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=464016">EAGLAXLE</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=464016">Pixabay</a>
+    </footer>
     </>
   )
 }

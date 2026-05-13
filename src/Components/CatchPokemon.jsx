@@ -4,9 +4,8 @@ export default function CatchPokemon({ handleUrlAndNames, urlAndNames, handleCli
   const [loading, setLoading] = useState(false)
   
   const pokemonNames = ["bulbasaur", "pikachu", "charmander", "squirtle", 
-          "pidgeot", "geodude", "eevee", "snorlax", "machoke", "gengar" ]
-
-  // const pokemonNames = ["bulbasaur", "pikachu", "charmander"]
+          "pidgeot", "geodude", "eevee", "snorlax", "machoke", "gengar",
+           "mudkip", "umbreon" ]
   const pokemonURLs = pokemonNames.map((item) => `https://pokeapi.co/api/v2/pokemon/${item}`)
 
   useEffect(() => {
