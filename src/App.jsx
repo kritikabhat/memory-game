@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import Header from './Components/Header.jsx'
-import Score from './Components/Score.jsx'
 import GameGrid from './Components/GameGrid.jsx'
 
 // At the end, change font to Pokemon also
@@ -28,8 +27,8 @@ function App() {
         setBestScore(score + 1);
       }
       setClickedCards([...clickedCards, id]);
-      randomiseURLArray()
     }
+    randomiseURLArray()
   }
 
   function randomiseURLArray() {
@@ -49,8 +48,7 @@ function App() {
   return (
     <>
     <section className='headerSection'>
-      <Header />
-      <Score />
+      <Header score={score} bestScore={bestScore} />
     </section>
     <section className='gameSection'>
       Get points by clicking on an image but don't click on any more than once!

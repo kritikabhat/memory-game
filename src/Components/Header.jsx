@@ -1,15 +1,14 @@
-export default function Header() {
-    // These two functions will be in the parent Component & passed down
-    function calcScore() {
+export default function Header({ score, bestScore }) {
 
-    }
-    function calcFinalScore() {
-
-    }
-
-    return (
-        <>
-        <h1>Pokemon Memory Game</h1>
-        </>
-    )
+  return (
+    <>
+    <div className="header">
+      <h1>Pokemon Memory Game</h1>
+    </div>
+    <div className="scores">
+      <p>Score: <span>{score}</span></p>
+      <p>Best Score: <span>{bestScore}</span></p>
+    </div>
+    </>
+  )
 }
