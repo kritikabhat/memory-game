@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export default function CatchPokemon({ handleUrlAndNames, urlAndNames, handleClickPokemon }) {
+export default function CatchPokemon({ handleUrlAndNames, urlAndNames, handleClickPokemon, handleKeyEnterPokemon }) {
   const [loading, setLoading] = useState(false)
   
   const pokemonNames = ["bulbasaur", "pikachu", "charmander", "squirtle", 
@@ -46,12 +46,15 @@ export default function CatchPokemon({ handleUrlAndNames, urlAndNames, handleCli
   }
 
   return (<>
-  <div className='gameGrid' onClick={handleClickPokemon} >
+  <div className='gameGrid'>
   {
     urlAndNames.map((obj) => {
       return (
         <div className="pokemonCard" key={obj.name}>
-        <img id={obj.name} src={obj.url} alt={`Image of ${obj.name}`} />
+          <div className='imgDiv' onClick={handleClickPokemon} onKeyUp={handleKeyEnterPokemon}>
+            <img id={obj.name} src={obj.url} alt={`Image of ${obj.name}`} tabIndex={0} />
+          </div>
+          <div className='pokemonName'>{obj.name}</div>
         </div>
       )
     })

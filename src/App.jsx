@@ -17,11 +17,9 @@ function App() {
 
   const handleScores = (id) => {
     if (clickedCards.includes(id)) {
-      console.log("oops, clicked same")
       setScore(0);
       setClickedCards([]);
     } else {
-      console.log("not the same so score increases")
       setScore(score + 1);
       if (score >= bestScore) {
         setBestScore(score + 1);
@@ -42,15 +40,12 @@ function App() {
       handleUrlAndNames(randomizedArr)
   }
 
-  console.log("Score on render: " + score)
-  console.log("BestScore on render: " +bestScore)
-
   return (
     <>
-    <section className='headerSection'>
+    <section className='headerSection' tabIndex={0} autoFocus>
       <Header score={score} bestScore={bestScore} />
     </section>
-    <section className='gameSection'>
+    <section className='gameSection' tabIndex={0}>
       Get points by clicking on an image but don't click on any more than once!
       <GameGrid handleUrlAndNames={handleUrlAndNames} urlAndNames={urlAndNames} handleScores={handleScores} />
     </section>

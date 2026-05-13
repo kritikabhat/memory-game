@@ -4,12 +4,16 @@ export default function GameGrid({ handleUrlAndNames, urlAndNames, handleScores}
 
   function handleClickPokemon(e) {
     let id = e.target.id
-    console.log("Clicked")
     handleScores(id)
-    console.log("should trigger re-render")
   }
-  
+  function handleKeyEnterPokemon(e) {
+    if (e.key === "Enter")
+      handleClickPokemon(e)
+  }
+
   return (
-      <CatchPokemon handleUrlAndNames={handleUrlAndNames} urlAndNames={urlAndNames} handleClickPokemon={handleClickPokemon} />
+      <CatchPokemon handleUrlAndNames={handleUrlAndNames} 
+        urlAndNames={urlAndNames} handleClickPokemon={handleClickPokemon} 
+        handleKeyEnterPokemon={handleKeyEnterPokemon} />
   )
 }
