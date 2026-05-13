@@ -1,14 +1,15 @@
 import CatchPokemon from "./CatchPokemon"
 
-export default function GameGrid() {
+export default function GameGrid({ handleUrlAndNames, urlAndNames, handleScores}) {
 
-
-
-  // GameGrid needs to randomise every time a user clicks a board
-  // So add a randomize approach in the CatcPokemon component
-  // then this should rerender everytime user clicks
-
+  function handleClickPokemon(e) {
+    let id = e.target.id
+    console.log("Clicked")
+    handleScores(id)
+    console.log("should trigger re-render")
+  }
+  
   return (
-      <CatchPokemon />
+      <CatchPokemon handleUrlAndNames={handleUrlAndNames} urlAndNames={urlAndNames} handleClickPokemon={handleClickPokemon} />
   )
 }

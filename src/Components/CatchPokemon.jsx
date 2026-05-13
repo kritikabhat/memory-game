@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react'
 
-export default function CatchPokemon() {
+export default function CatchPokemon({ handleUrlAndNames, urlAndNames, handleClickPokemon }) {
   const [loading, setLoading] = useState(false)
-  const [urlAndNames, setUrlAndNames] = useState([])
+  
+  const pokemonNames = ["bulbasaur", "pikachu", "charmander", "squirtle", 
+          "pidgeot", "geodude", "eevee", "snorlax", "machoke", "gengar" ]
 
-  //const pokemonNames = ["bulbasaur", "pikachu", "charmander", "squirtle", 
-  //        "pidgeot", "geodude", "eevee", "snorlax", "machoke", "gengar" ]
-
-  const pokemonNames = ["bulbasaur", "pikachu", "charmander"]
+  // const pokemonNames = ["bulbasaur", "pikachu", "charmander"]
   const pokemonURLs = pokemonNames.map((item) => `https://pokeapi.co/api/v2/pokemon/${item}`)
 
   useEffect(() => {
     const getMultiplePokemons = async () => {
       setLoading(true)
-      try {
+      try {         
 
       const requests = pokemonURLs.map(async (url) => {
         const response = await fetch(url)
@@ -28,7 +27,7 @@ export default function CatchPokemon() {
           url: item.sprites.other["official-artwork"].front_default
         }))
       
-      setUrlAndNames(myData)
+      handleUrlAndNames(myData)
 
       } catch {
         console.log(error)
@@ -44,27 +43,6 @@ export default function CatchPokemon() {
   if (loading) {
     console.log("loading")
     return <div>Loading...</div>
-  }
-
-  function randomiseURLArray() {
-    const randomizedArr = [...urlAndNames]
-
-    for (let i = randomizedArr.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1))
-      let temp = randomizedArr[j]
-      randomizedArr[j] = randomizedArr[i]
-      randomizedArr[i] = temp
-    }
-
-    setUrlAndNames(randomizedArr)
-  }
-
-
-  function handleClickPokemon(e) {
-    console.log(e.target.id) // This way I can know which one was clicked
-    console.log("Clicked")
-    randomiseURLArray()
-    console.log("should trigger reload")
   }
 
   return (<>
