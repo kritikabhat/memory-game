@@ -58,6 +58,8 @@ function App() {
     </section>
     <footer>
       Sound Effect by <a href="https://pixabay.com/users/eaglaxle-53749042/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=464016">EAGLAXLE</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=464016">Pixabay</a>
+      <br />
+      <a href="https://www.flaticon.com/free-icons/pokemon" title="pokemon icons">Pokemon icons created by Those Icons - Flaticon</a>
     </footer>
     </>
   )
